@@ -1,0 +1,149 @@
+<html ng-app="BornIn1955_app">
+
+<head>
+    <title>1955 Dashboard</title>
+    <!-- require angular -->
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.js"></script> -->
+    <script src='http://localhost:8001/static/bower_components/angular/angular.min.js'></script>
+    <script src="http://localhost:8001//static/bower_components/angular-route/angular-route.min.js"></script>
+
+    <script>
+        // Let's create our angular module
+        var BornIn1955Module = angular.module('BornIn1955_app', ['ngRoute']);
+        // create the NameFactory
+        BornIn1955Module.factory('NameFactory', function($http) {
+            var factory = {};
+            var names = [];
+
+            factory.index = function(callback) {
+                console.log("factory.index");
+                // Where do we get access to $http?
+                $http.get('/names')
+                .then(function(output) {
+                    names = output.data;
+                    console.log("output =", output.data);
+                    callback(names);
+                })
+                .catch (function(err) {
+                    console.log("err =", err );
+                });
+            };
+
+            factory.create = function(data, callback) {
+                console.log("factory.new data:", data);
+                console.log('the name', data.name);
+                $http.get('/names/new/' + data.name)
+                .then(function(output) {
+                    console.log("get /new response: ", output.data);
+                    callback(output.data);
+                })
+                .catch (function(err){
+                    console.log("err =", err );
+                });
+            };
+
+            factory.remove = function(data, callback) {
+                console.log("factory.remove data:", data);
+                $http.get('/names/remove/' + data)
+                .then(function() {
+                    console.log("remove response");
+                    callback();
+                })
+                .catch (function(err){
+                    console.log("err =", err );
+                });
+            };
+
+            return factory;
+        });
+
+        // Now let's create a controller with some hardcoded data!
+        BornIn1955Module.controller('BornIn1955Controller', function($scope, NameFactory) {
+            // This line goes at the top of the controller callback because the minute the controller gets called upon we want to create the $scope.friends array
+            NameFactory.index(function(data) {
+                console.log("NameFactory.index", data);
+                $scope.names = data;
+                console.log("$scope.names =", $scope.names);
+                // anything else that you want to happen after storing names to $scope
+            });
+
+            $scope.addname = function() {
+                // note the use of callbacks here
+                NameFactory.create($scope.new_name, function(theOutput) {
+                    console.log("new name =", $scope.new_name);
+                    console.log('returned name', theOutput);
+                    $scope.names.push($scope.new_name);
+                    $scope.new_name = {};
+                    console.log('new $scope.names ', $scope.names);
+                });
+            };
+
+            $scope.removename = function(name) {
+                var removeThisName =$scope.names.indexOf(name);
+                console.log('removename: ', removeThisName);
+                console.log('$scope.names = ', $scope.names);
+                console.log('remove_id: ', $scope.names[removeThisName]._id);
+                if(~removeThisName){
+                    var remove_id = $scope.names[removeThisName]._id;
+                    // note the use of callbacks here
+                    NameFactory.remove(remove_id, function() {
+                        console.log("remove name =", removeThisName);
+                        $scope.names.splice(removeThisName,1);
+                    });
+                }
+            };
+
+        });
+    </script>
+
+    <style>
+    #theBox {
+        width: 600px;
+        border-style: solid;
+        margin: 1em;
+        padding: 5px;
+    }
+    #Add {
+        float: right;
+    }
+    .button {
+        float: right;
+    }
+    table {
+        width: 100%;
+    }
+    tr.d0 td {
+        background-color: #808080; color: black;
+    }
+    tr.d1 td {
+        background-color: #D3D3D3; color: black;
+    }
+</style>
+
+</head>
+<!-- everything in the body is going to use the names controller (this gives us access to the names controller $scope) -->
+
+<body ng-controller="BornIn1955Controller">
+    <h1>1955 Dashboard</h1>
+    <hr>
+    <div id="Add">
+        <b>Add people who were born in 1955!</b><br>
+        <div class="button">
+        <input type="text" ng-model="new_name.name" placeholder="name" tabindex="1"><br>
+        <input type="submit" ng-click="addname()" tabindex="2">
+    </div>
+    </div>
+
+    <table>
+        <tr><th>Names</th><th>Actions</th></tr>
+        <tr ng-repeat="name in names"  ng-class-odd="'d1'" ng-class-even="'d2'">
+            <td>{{name.name}}</td>
+            <td><div class="button"><input type='submit' value='Delete' ng-click='removename(name)'</div></td>
+        </tr>
+    </table>
+
+
+</body>
+
+</html>
