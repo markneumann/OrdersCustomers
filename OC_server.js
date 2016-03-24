@@ -20,5 +20,5 @@ var board_routes = require('./server/config/routes.js')(app);
 console.log("loaded routes");
 
 app.listen(8001, function() {
-    console.log("listening on port 8001 - API");
+    console.log("listening on port 8001 - OrderCustomers");
 });

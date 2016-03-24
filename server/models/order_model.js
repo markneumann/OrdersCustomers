@@ -1,19 +1,20 @@
 //basic model
-console.log("loading customer_model");
+console.log("loading order_model");
 var mongoose = require('mongoose');
 //
-var CustomerSchema = new mongoose.Schema({
+var OrderSchema = new mongoose.Schema({
     //define schema here
-    name: String
+    product: String,
+    quantity: Number,
     }, { timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at'
             }
-        }
+       }
 );
 
 //NameSchema.path('name').required(true, 'Name cannot be blank');
 
-mongoose.model('customers', CustomerSchema);
+mongoose.model('orders', OrderSchema);
 
-console.log("exit customer_models");
+console.log("exit order_model");

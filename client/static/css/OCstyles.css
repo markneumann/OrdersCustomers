@@ -1,0 +1,25 @@
+body {
+    background-color: FloralWhite;
+    font-family: verdana;
+}
+#theBox {
+    width: 600px;
+    border-style: solid;
+    margin: 1em;
+    padding: 5px;
+}
+#Add {
+    float: left;
+}
+.button {
+    float: right;
+}
+table {
+    width: 100%;
+}
+tr.d0 td {
+    background-color: #808080; color: black;
+}
+tr.d1 td {
+    background-color: #D3D3D3; color: black;
+}
