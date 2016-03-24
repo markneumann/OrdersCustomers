@@ -1,19 +1,20 @@
 <div ng-controller='OrderController'>
-    <h1>ORDERS</h1>
-    <!-- <div id="Add">
-        <b>Add people who were born in 1955!</b><br>
+    <h3>ORDERS</h3>
+    <div id="Add">
+        <b>Add a new order</b><br>
         <div class="button">
-            <input type="text" ng-model="new_name.name" placeholder="name" tabindex="1"><br>
-            <input type="submit" ng-click="addname()" tabindex="2">
+            Customer <input type="text" ng-model="new_order.customer_name" placeholder="name" tabindex="1"><br>
+            Quantity <input type="text" ng-model="new_order.quantity" placeholder="1" tabindex="2">
+            <input type="text" ng-model="new_order.product" placeholder="product" tabindex="3">
+            <input type="submit" ng-click="addorder()" tabindex="4">
         </div>
     </div>
--->
+
     <table>
         <tr><th>Customer</th><th>Product</th><th>Quantity</th><th>Date</th></tr>
         <tr ng-repeat="order in orders"  ng-class-odd="'d1'" ng-class-even="'d2'">
             <td>placeholder</td>
             <td>{{order.product}}</td><td>{{order.quantity}}</td><td>{{order.created_at}}</td>
-            <td><div class="button"><input type='submit' value='Delete' ng-click='removename(name)'</div></td>
         </tr>
     </table>
 </div>

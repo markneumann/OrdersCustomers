@@ -22,7 +22,7 @@ module.exports = (function() {
         new_order: function(req, res) {
             console.log("--> new order path");
             var newOrder = new Order({
-                customer: req.body.customer,
+                customer: req.body.customer_name,
                 product:  req.body.product,
                 quantity: req.body.quantity
             });

@@ -18,19 +18,19 @@ OCModule.factory('OrderFactory', function($http) {
         });
     };
 
-    // factory.create = function(data, callback) {
-    //     console.log("factory.new data:", data);
-    //     console.log('the order name', data);
-    //     $http.post('/order/new/',data)
-    //     .then(function(output) {
-    //         console.log("get /new response: ", output.data);
-    //         callback(output.data);
-    //     })
-    //     .catch (function(err){
-    //         console.log("err =", err );
-    //     });
-    // };
-    //
+    factory.create = function(data, callback) {
+        console.log("factory.new data:", data);
+        console.log('the order name', data);
+        $http.post('/orders/',data)
+        .then(function(output) {
+            console.log("get /new response: ", output.data);
+            callback(output.data);
+        })
+        .catch (function(err){
+            console.log("err =", err );
+        });
+    };
+
     // factory.remove = function(data, callback) {
     //     console.log("factory.remove data:", data);
     //     $http.get('/cusomter/remove/' + data)
