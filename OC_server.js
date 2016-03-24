@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, './client')));
+//app.use(express.static(path.join(__dirname, './bower_components')));
 
 //require mongoose config
 require('./server/config/mongoose.js');
@@ -20,5 +21,5 @@ var board_routes = require('./server/config/routes.js')(app);
 console.log("loaded routes");
 
 app.listen(8001, function() {
-    console.log("listening on port 8001 - OrderCustomers");
+    console.log("listening on port 8001 - OrderCustomers", Date());
 });

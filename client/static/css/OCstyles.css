@@ -11,6 +11,9 @@ body {
 #Add {
     float: left;
 }
+#filter {
+    float: right;
+}
 .button {
     float: right;
 }

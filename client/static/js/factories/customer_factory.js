@@ -16,6 +16,7 @@ OCModule.factory('CustomerFactory', function($http) {
         })
         .catch (function(err) {
             console.log("err =", err );
+            callback(err);
         });
     };
 
