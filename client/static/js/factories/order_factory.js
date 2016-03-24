@@ -3,6 +3,7 @@ console.log('loading order_factory');
 OCModule.factory('OrderFactory', function($http) {
     var factory = {};
     var orders = [];
+    var order_customers = [];
 
     factory.index = function(callback) {
         console.log("factory.index");
@@ -18,12 +19,29 @@ OCModule.factory('OrderFactory', function($http) {
         });
     };
 
+
+        factory.customer_index = function(callback) {
+            console.log("customerfactory.index from orders");
+            // Where do we get access to $http?
+            $http.get('/customers')
+            .then(function(output) {
+                order_customers = output.data;
+                console.log("output =", output.data);
+                callback(order_customers);
+            })
+            .catch (function(err) {
+                console.log("err =", err );
+            });
+        };
+
     factory.create = function(data, callback) {
         console.log("factory.new data:", data);
-        console.log('the order name', data);
-        $http.post('/orders/',data)
+        console.log('the order name', data.name.name);
+        data.name = data.name.name;
+        console.log('revised data = ', data);
+        $http.post('/orders',data)
         .then(function(output) {
-            console.log("get /new response: ", output.data);
+            console.log("post /orders response: ", output.data);
             callback(output.data);
         })
         .catch (function(err){

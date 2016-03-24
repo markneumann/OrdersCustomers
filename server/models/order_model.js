@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 //
 var OrderSchema = new mongoose.Schema({
     //define schema here
+    name: String,
     product: String,
     quantity: Number,
     }, { timestamps: {

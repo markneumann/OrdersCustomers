@@ -2,18 +2,28 @@
     <h3>ORDERS</h3>
     <div id="Add">
         <b>Add a new order</b><br>
-        <div class="button">
-            Customer <input type="text" ng-model="new_order.customer_name" placeholder="name" tabindex="1"><br>
-            Quantity <input type="text" ng-model="new_order.quantity" placeholder="1" tabindex="2">
-            <input type="text" ng-model="new_order.product" placeholder="product" tabindex="3">
-            <input type="submit" ng-click="addorder()" tabindex="4">
-        </div>
+            <form>
+                Customer
+                    <select ng-model='new_order.name'
+                            ng-options='customer.name for customer in customers'>
+                    </select>
+                <br>
+                Quantity <input type="text" ng-model="new_order.quantity" placeholder="1" tabindex="2">
+                <select ng-model='new_order.product'>
+                    <option value='rocks'>Rocks</option>
+                    <option value='pebbles'>Pebbles</option>
+                    <option value='stones'>Stones</option>
+                    <option value='boulders'>Boulders</option>
+                    <option value='sand'>Sand</option>
+                <input type="submit" ng-click="addorder()" tabindex="4">
+            <form>
+        <br>
     </div>
 
     <table>
         <tr><th>Customer</th><th>Product</th><th>Quantity</th><th>Date</th></tr>
         <tr ng-repeat="order in orders"  ng-class-odd="'d1'" ng-class-even="'d2'">
-            <td>placeholder</td>
+            <td>{{order.name}}</td>
             <td>{{order.product}}</td><td>{{order.quantity}}</td><td>{{order.created_at}}</td>
         </tr>
     </table>
