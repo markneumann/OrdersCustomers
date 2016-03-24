@@ -4,7 +4,6 @@ console.log('OCModule',OCModule);
 OCModule.factory('CustomerFactory', function($http) {
     var factory = {};
     var customers = [];
-
     factory.index = function(callback) {
         console.log("factory.index");
         // Where do we get access to $http?
@@ -20,7 +19,7 @@ OCModule.factory('CustomerFactory', function($http) {
         });
     };
 
-    factory.create = function(data, callback) {
+    factory.create = function(data, callback, forErrors) {
         console.log("factory.new data:", data);
         console.log('the customer name', data);
         $http.post('/customers',data)
@@ -28,9 +27,7 @@ OCModule.factory('CustomerFactory', function($http) {
             console.log("get /new response: ", output.data);
             callback(output.data);
         })
-        .catch (function(err){
-            console.log("err =", err );
-        });
+        .catch (forErrors);
     };
 
     factory.remove = function(data, callback) {
