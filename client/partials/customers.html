@@ -16,7 +16,7 @@
     </div>
     <table>
         <tr><th>Customer Name</th><th>Created Date</th><th>Actions</th></tr>
-        <tr ng-repeat="customer in customers"  ng-class-odd="'d1'" ng-class-even="'d2'">
+        <tr ng-repeat="customer in customers | filter: filter_name"  ng-class-odd="'d1'" ng-class-even="'d2'">
             <td>{{customer.name}}</td><td>{{customer.created_at | date:'medium'}}</td>
             <td><div class="button"><input type='submit' value='Delete' ng-click='removecustomer(customer)'</div></td>
         </tr>
