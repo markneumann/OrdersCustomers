@@ -31,7 +31,7 @@ module.exports = (function() {
             .then(function() {
                 console.log("return 200");
                 res.status(200); // send back http 200 status if successful
-                res.json({success: true});
+                res.json(newOrder);
             })
             .catch (function(err){
                 console.log(err);

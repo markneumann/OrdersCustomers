@@ -1,5 +1,5 @@
 console.log('loading customer_controller');
-// Now let's create a controller with some hardcoded data!
+//
 OCModule.controller('CustomerController', function($scope, CustomerFactory) {
     // This line goes at the top of the controller callback because the minute the controller gets called upon we want to create the $scope.friends array
     $scope.errorArea = {};
@@ -16,7 +16,7 @@ OCModule.controller('CustomerController', function($scope, CustomerFactory) {
             function(theOutput) {
                 console.log("new customer =", $scope.new_customer);
                 console.log('returned customer', theOutput);
-                $scope.customers.push($scope.new_customer);
+                $scope.customers.push(theOutput);
                 $scope.new_customer = {};
                 console.log('new $scope.customers ', $scope.customers);
             },

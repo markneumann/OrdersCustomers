@@ -26,9 +26,10 @@ module.exports = (function() {
             });
             newCustomer.save()
             .then(function() {
-                console.log("return 200");
+                console.log("return 200", newCustomer);
                 res.status(200); // send back http 200 status if successful
-                res.json({success: true});
+                res.json(newCustomer);
+                // res.json({success: true});
             })
             .catch (function(err){
                 console.log(err);

@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, './client')));
-//app.use(express.static(path.join(__dirname, './bower_components')));
+app.use(express.static(path.join(__dirname, './bower_components')));
 
 //require mongoose config
 require('./server/config/mongoose.js');

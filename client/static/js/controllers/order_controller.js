@@ -21,7 +21,7 @@ OCModule.controller('OrderController', function($scope, OrderFactory) {
         OrderFactory.create($scope.new_order, function(theOutput) {
             console.log("new order =", $scope.new_order);
             console.log('returned order', theOutput);
-            $scope.orders.push($scope.new_order);
+            $scope.orders.push(theOutput);
             $scope.new_order = {};
             console.log('new $scope.orders ', $scope.orders);
         });
