@@ -40,6 +40,28 @@ module.exports = (function() {
             });
         },
 
+
+        edit_order: function(req, res) {
+            console.log("--> edit order path");
+            console.log("req.body =", req.body);
+            // var editOrder = new Order({
+            //     name: req.body.name,
+            //     product:  req.body.product,
+            //     quantity: req.body.quantity
+            // });
+            orders.findByIdAndUpdate(req.params.id, {set: req.body})
+            .then(function() {
+                console.log("return 200");
+                res.status(200); // send back http 200 status if successful
+                res.json({success:'true'});
+            })
+            .catch (function(err){
+                console.log(err);
+                res.status(500); // send back http 200 status if successful
+                res.json({error: err});
+            });
+        },
+
         // remove_order:  function(req, res){
         //     console.log("--> remove order path");
         //     console.log(req.params);

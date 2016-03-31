@@ -8,6 +8,7 @@ var Customer = require('../controller/customer_controller.js');
 module.exports = function(app){
     app.get('/orders', Order.index);
     app.post('/orders', Order.new_order);
+    app.post('/orders/edit/:id, Order.edit_order');
     // // app.get('/orders/remove/:id', Order.remove_order);
     // // app.get('/orders/show/:id', Order.show_order);
     app.get('/customers', Customer.index);
